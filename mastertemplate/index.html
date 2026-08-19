@@ -145,44 +145,6 @@
                                     <div class="nav-border"></div>
                                 </div>
                             </div>
-                            <div data-delay="0" data-hover="true" class="nav-dropdown-wrapper w-dropdown">
-                                <div data-w-id="0ddb1fdf-8505-7821-cd56-ffa75d1cd3e3"
-                                    class="nav-toggle w-dropdown-toggle">
-                                    <div href="#" class="nav-link horizontal">
-                                        <div>Pages</div>
-                                        <div class="nav-dropdown-icon">expand_more</div>
-                                    </div>
-                                    <div class="mask">
-                                        <div class="nav-border"></div>
-                                    </div>
-                                </div>
-                                <nav class="nav-dropdown-contents w-dropdown-list">
-                                    <div class="nav-dropdown-contents-body">
-                                        <div class="nav-dropdown-links-block">
-                                            <div class="dropdown-links-grid">
-                                                <a href="#" class="submenu-block w-inline-block">
-                                                    <div class="submenu-link">
-                                                        <div class="hover-divider"></div>
-                                                        <div>Team</div>
-                                                    </div>
-                                                </a>
-                                                <a href="#" class="submenu-block w-inline-block">
-                                                    <div class="submenu-link">
-                                                        <div class="hover-divider"></div>
-                                                        <div>Pricing</div>
-                                                    </div>
-                                                </a>
-                                                <a href="#" class="submenu-block w-inline-block">
-                                                    <div class="submenu-link">
-                                                        <div class="hover-divider"></div>
-                                                        <div>Projects</div>
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </nav>
-                            </div>
                             <div data-w-id="cfa4e5d5-f78e-c7e3-a1da-bd7d891b7b90" class="nav-list">
                                 <a href="#" class="nav-link w-inline-block">
                                     <div class="default-text">Contact</div>
@@ -564,8 +526,8 @@
                         </a>
                     </div>
                     <div style="-webkit-transform:translate3d(0, 60px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(0, 60px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(0, 60px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(0, 60px, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0"
-                        class="banner-image-wrapper"><img src="./assets/images/hero-contractor.png"
-                            loading="eager" width="1860" alt="" class="hero-image" /></div>
+                        class="banner-image-wrapper"><img src="./assets/images/hero-contractor.png" loading="eager"
+                            width="1860" alt="" class="hero-image" /></div>
                 </div>
             </div>
             <div style="display:block" class="absolute-hover-white"></div>
@@ -606,6 +568,614 @@
                 </div>
             </div>
         </section>
+
+        <!-- ==============================================
+             Instant Quote Form Section
+             ============================================== -->
+        <style>
+            .instant-quote-section {
+                padding-top: 80px;
+                padding-bottom: 80px;
+                background-color: var(--brand-bg-tertiary, #f7f7fa);
+                position: relative;
+                overflow: hidden;
+            }
+            .instant-quote-section::before {
+                content: "";
+                position: absolute;
+                top: -120px;
+                right: -100px;
+                width: 400px;
+                height: 400px;
+                background: radial-gradient(circle, rgba(26, 148, 255, 0.08) 0%, rgba(26, 148, 255, 0) 70%);
+                border-radius: 50%;
+                pointer-events: none;
+            }
+            .instant-quote-section::after {
+                content: "";
+                position: absolute;
+                bottom: -150px;
+                left: -100px;
+                width: 450px;
+                height: 450px;
+                background: radial-gradient(circle, rgba(9, 86, 175, 0.06) 0%, rgba(9, 86, 175, 0) 70%);
+                border-radius: 50%;
+                pointer-events: none;
+            }
+            .iq-container-grid {
+                display: grid;
+                grid-template-columns: 1fr 1.15fr;
+                gap: 50px;
+                align-items: center;
+                position: relative;
+                z-index: 2;
+            }
+            .iq-info-side {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
+            .iq-heading {
+                font-family: var(--fonts--heading-font, "Bebas Neue", sans-serif);
+                color: var(--brand-text-heading, #0c0c0c);
+                font-size: 46px;
+                line-height: 1.1;
+                margin-top: 10px;
+                margin-bottom: 16px;
+                letter-spacing: 0.5px;
+            }
+            .iq-paragraph {
+                font-family: var(--fonts--paragraph-font, "DM Sans", sans-serif);
+                color: var(--brand-text-body, #707070);
+                font-size: 16px;
+                line-height: 1.6;
+                margin-bottom: 28px;
+            }
+            .iq-benefits-list {
+                display: flex;
+                flex-direction: column;
+                gap: 16px;
+                margin-bottom: 30px;
+            }
+            .iq-benefit-item {
+                display: flex;
+                align-items: flex-start;
+                gap: 16px;
+                background: var(--brand-surface, #ffffff);
+                padding: 16px 20px;
+                border-radius: var(--border--border, 10px);
+                border: 1px solid var(--brand-border-light, #e6e6e6);
+                box-shadow: 0 4px 15px rgba(6, 35, 78, 0.03);
+                transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            }
+            .iq-benefit-item:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 8px 25px rgba(6, 35, 78, 0.07);
+                border-color: var(--brand-primary, #1a94ff);
+            }
+            .iq-benefit-icon-wrapper {
+                width: 44px;
+                height: 44px;
+                min-width: 44px;
+                background-color: rgba(26, 148, 255, 0.1);
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .iq-benefit-icon {
+                width: 22px;
+                height: 22px;
+                object-fit: contain;
+            }
+            .iq-benefit-title {
+                font-family: var(--fonts--paragraph-font, "DM Sans", sans-serif);
+                font-size: 16px;
+                font-weight: 700;
+                color: var(--brand-dark-navy, #06234e);
+                margin-bottom: 3px;
+            }
+            .iq-benefit-desc {
+                font-family: var(--fonts--paragraph-font, "DM Sans", sans-serif);
+                font-size: 13.5px;
+                color: var(--brand-text-body, #707070);
+                line-height: 1.4;
+                margin: 0;
+            }
+            .iq-emergency-banner {
+                background: linear-gradient(135deg, var(--brand-dark-navy, #06234e) 0%, var(--brand-secondary, #0956af) 100%);
+                border-radius: var(--border--border, 10px);
+                padding: 18px 22px;
+                display: flex;
+                align-items: center;
+                gap: 16px;
+                color: #ffffff;
+                text-decoration: none;
+                box-shadow: 0 10px 25px rgba(6, 35, 78, 0.15);
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+            }
+            .iq-emergency-banner:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 12px 30px rgba(6, 35, 78, 0.25);
+            }
+            .iq-emergency-icon {
+                width: 42px;
+                height: 42px;
+                min-width: 42px;
+                background: var(--brand-primary, #1a94ff);
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .iq-emergency-icon img {
+                width: 20px;
+                height: 20px;
+                filter: brightness(0) invert(1);
+            }
+            .iq-emergency-content {
+                display: flex;
+                flex-direction: column;
+            }
+            .iq-emergency-label {
+                font-size: 12px;
+                text-transform: uppercase;
+                letter-spacing: 1px;
+                font-weight: 700;
+                color: rgba(255, 255, 255, 0.8);
+            }
+            .iq-emergency-phone {
+                font-size: 18px;
+                font-weight: 700;
+                color: #ffffff;
+            }
+
+            /* Form Card Styles */
+            .iq-card {
+                background-color: var(--brand-surface, #ffffff);
+                border-radius: var(--border--border-lg, 20px);
+                border: 1px solid var(--brand-border-light, #e6e6e6);
+                box-shadow: 0 15px 50px rgba(6, 35, 78, 0.08);
+                padding: 36px 32px;
+                position: relative;
+            }
+            .iq-card-header {
+                margin-bottom: 22px;
+                border-bottom: 1px solid #f0f0f0;
+                padding-bottom: 16px;
+            }
+            .iq-card-title {
+                font-family: var(--fonts--heading-font, "Bebas Neue", sans-serif);
+                font-size: 32px;
+                color: var(--brand-dark-navy, #06234e);
+                line-height: 1.1;
+                margin-top: 0;
+                margin-bottom: 4px;
+                letter-spacing: 0.5px;
+            }
+            .iq-card-subtitle {
+                font-family: var(--fonts--paragraph-font, "DM Sans", sans-serif);
+                font-size: 14px;
+                color: var(--brand-text-body, #707070);
+                margin: 0;
+            }
+            .iq-form-row {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 14px;
+                margin-bottom: 14px;
+            }
+            .iq-form-group {
+                display: flex;
+                flex-direction: column;
+                margin-bottom: 14px;
+            }
+            .iq-label {
+                font-family: var(--fonts--paragraph-font, "DM Sans", sans-serif);
+                font-size: 13px;
+                font-weight: 600;
+                color: var(--brand-dark-navy, #06234e);
+                margin-bottom: 6px;
+                display: flex;
+                align-items: center;
+                gap: 5px;
+            }
+            .iq-input-wrapper {
+                position: relative;
+                display: flex;
+                align-items: center;
+            }
+            .iq-input-wrapper .iq-field-icon {
+                position: absolute;
+                left: 14px;
+                width: 16px;
+                height: 16px;
+                opacity: 0.6;
+                pointer-events: none;
+            }
+            .iq-input, .iq-select, .iq-textarea {
+                width: 100%;
+                font-family: var(--fonts--paragraph-font, "DM Sans", sans-serif);
+                font-size: 14px;
+                color: var(--brand-text-heading, #0c0c0c);
+                background-color: var(--brand-surface-secondary, #f7f7fa);
+                border: 1px solid var(--brand-border, #e0e0e0);
+                border-radius: 8px;
+                padding: 11px 14px 11px 38px;
+                transition: all 0.25s ease;
+                outline: none;
+                box-sizing: border-box;
+                display: block;
+            }
+            .iq-select {
+                appearance: none;
+                -webkit-appearance: none;
+                background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2214%22%20height%3D%2214%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23707070%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%3E%3C%2Fpolyline%3E%3C%2Fsvg%3E");
+                background-repeat: no-repeat;
+                background-position: right 14px center;
+                background-size: 12px;
+                cursor: pointer;
+            }
+            .iq-input:focus, .iq-select:focus, .iq-textarea:focus {
+                background-color: #ffffff;
+                border-color: var(--brand-primary, #1a94ff);
+                box-shadow: 0 0 0 3px rgba(26, 148, 255, 0.15);
+            }
+            .iq-textarea {
+                padding-left: 14px;
+                resize: vertical;
+                min-height: 80px;
+            }
+            .iq-property-toggle {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+                margin-top: 2px;
+            }
+            .iq-toggle-option {
+                position: relative;
+            }
+            .iq-toggle-option input[type="radio"] {
+                position: absolute;
+                opacity: 0;
+                cursor: pointer;
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+                margin: 0;
+                z-index: 2;
+            }
+            .iq-toggle-label {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 8px;
+                padding: 10px 14px;
+                background-color: var(--brand-surface-secondary, #f7f7fa);
+                border: 1px solid var(--brand-border, #e0e0e0);
+                border-radius: 8px;
+                font-size: 13.5px;
+                font-weight: 600;
+                color: var(--brand-text-body, #707070);
+                cursor: pointer;
+                transition: all 0.25s ease;
+                text-align: center;
+                user-select: none;
+            }
+            .iq-toggle-option input[type="radio"]:checked + .iq-toggle-label {
+                background-color: rgba(26, 148, 255, 0.1);
+                border-color: var(--brand-primary, #1a94ff);
+                color: var(--brand-secondary, #0956af);
+            }
+            .iq-toggle-label img {
+                width: 16px;
+                height: 16px;
+            }
+            .iq-submit-btn {
+                width: 100%;
+                border: none;
+                outline: none;
+                cursor: pointer;
+                border-radius: var(--border--button-radius, 1000px);
+                background-color: var(--brand-primary, #1a94ff);
+                color: #ffffff;
+                padding: 15px 32px;
+                font-family: var(--fonts--paragraph-font, "DM Sans", sans-serif);
+                font-size: 17px;
+                font-weight: 700;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 12px;
+                box-shadow: 0 8px 25px rgba(26, 148, 255, 0.35);
+                transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+                margin-top: 10px;
+                position: relative;
+                overflow: hidden;
+            }
+            .iq-submit-btn:hover {
+                background-color: var(--brand-secondary, #0956af);
+                transform: translateY(-2px);
+                box-shadow: 0 12px 30px rgba(9, 86, 175, 0.4);
+            }
+            .iq-submit-btn img {
+                width: 18px;
+                height: 18px;
+                filter: brightness(0) invert(1);
+                transition: transform 0.3s ease;
+            }
+            .iq-submit-btn:hover img {
+                transform: translateX(4px);
+            }
+            .iq-privacy-note {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 6px;
+                font-family: var(--fonts--paragraph-font, "DM Sans", sans-serif);
+                font-size: 12px;
+                color: var(--brand-text-muted, #999999);
+                margin-top: 14px;
+                text-align: center;
+            }
+            .iq-privacy-note img {
+                width: 13px;
+                height: 13px;
+                opacity: 0.7;
+            }
+            .iq-success-box {
+                text-align: center;
+                padding: 35px 25px;
+                background: #f0fdf4;
+                border: 1px solid #bbf7d0;
+                border-radius: var(--border--border, 10px);
+                margin-top: 10px;
+            }
+            .iq-success-icon {
+                width: 54px;
+                height: 54px;
+                background: #16a34a;
+                border-radius: 50%;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                margin-bottom: 16px;
+            }
+            .iq-success-icon img {
+                width: 26px;
+                height: 26px;
+            }
+            .iq-success-title {
+                font-family: var(--fonts--heading-font, "Bebas Neue", sans-serif);
+                font-size: 28px;
+                color: #15803d;
+                margin-bottom: 8px;
+            }
+            .iq-success-desc {
+                font-family: var(--fonts--paragraph-font, "DM Sans", sans-serif);
+                font-size: 14.5px;
+                color: #166534;
+                line-height: 1.5;
+                margin: 0;
+            }
+
+            @media screen and (max-width: 991px) {
+                .iq-container-grid {
+                    grid-template-columns: 1fr;
+                    gap: 40px;
+                }
+                .iq-heading {
+                    font-size: 38px;
+                }
+            }
+            @media screen and (max-width: 600px) {
+                .iq-form-row {
+                    grid-template-columns: 1fr;
+                    gap: 14px;
+                }
+                .iq-card {
+                    padding: 24px 18px;
+                }
+                .iq-heading {
+                    font-size: 32px;
+                }
+            }
+        </style>
+
+        <section id="instant-quote" class="instant-quote-section">
+            <div class="container">
+                <div class="iq-container-grid">
+                    <!-- Left Side: Value Proposition & Trust -->
+                    <div class="iq-info-side">
+                        <div class="title">
+                            <div class="title-divider">
+                                <div class="primary-title-divider-loop"></div>
+                            </div>
+                            <div>Instant Quote</div>
+                        </div>
+                        <h2 class="iq-heading">Get a Fast, Free &amp; Transparent Quote</h2>
+                        <p class="iq-paragraph">
+                            Tell us about your plumbing project or emergency issue. Our certified team provides upfront, accurate estimates with zero obligation and no hidden fees.
+                        </p>
+
+                        <div class="iq-benefits-list">
+                            <div class="iq-benefit-item">
+                                <div class="iq-benefit-icon-wrapper">
+                                    <img src="./assets/images/dollar.png" alt="Upfront Pricing" class="iq-benefit-icon" />
+                                </div>
+                                <div>
+                                    <div class="iq-benefit-title">Guaranteed Upfront Pricing</div>
+                                    <p class="iq-benefit-desc">Know the exact cost before any work starts. No hidden fees or surprise charges.</p>
+                                </div>
+                            </div>
+
+                            <div class="iq-benefit-item">
+                                <div class="iq-benefit-icon-wrapper">
+                                    <img src="./assets/images/24-7.avif" alt="Fast Response" class="iq-benefit-icon" />
+                                </div>
+                                <div>
+                                    <div class="iq-benefit-title">Fast 15-Minute Response</div>
+                                    <p class="iq-benefit-desc">Our dedicated coordinators review quote requests immediately for prompt scheduling.</p>
+                                </div>
+                            </div>
+
+                            <div class="iq-benefit-item">
+                                <div class="iq-benefit-icon-wrapper">
+                                    <img src="./assets/images/trusted.avif" alt="Certified Technicians" class="iq-benefit-icon" />
+                                </div>
+                                <div>
+                                    <div class="iq-benefit-title">Licensed &amp; Insured Specialists</div>
+                                    <p class="iq-benefit-desc">Every repair and installation is handled by master plumbers backed by warranty.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <a href="tel:5552345678" class="iq-emergency-banner">
+                            <div class="iq-emergency-icon">
+                                <img src="./assets/images/telephone.avif" alt="Call Now" />
+                            </div>
+                            <div class="iq-emergency-content">
+                                <span class="iq-emergency-label">Need Immediate Emergency Service?</span>
+                                <span class="iq-emergency-phone">Call (555) 234-5678 (24/7 Available)</span>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Right Side: Form Card -->
+                    <div class="iq-card">
+                        <div class="iq-card-header">
+                            <h3 class="iq-card-title">Request Your Free Estimate</h3>
+                            <p class="iq-card-subtitle">Fill out the form below and we&#x27;ll get back to you promptly.</p>
+                        </div>
+
+                        <div class="w-form">
+                            <form id="instant-quote-form" name="instant-quote-form" data-name="Instant Quote Form" method="get">
+                                <!-- Service Type -->
+                                <div class="iq-form-group">
+                                    <label for="iq-service" class="iq-label">Select Service Needed *</label>
+                                    <div class="iq-input-wrapper">
+                                        <img src="./assets/images/sink.avif" alt="" class="iq-field-icon" />
+                                        <select id="iq-service" name="service" required="" class="iq-select w-select">
+                                            <option value="">Choose a Plumbing Service...</option>
+                                            <option value="Emergency Plumbing">Emergency Plumbing &amp; Leak Repair</option>
+                                            <option value="Drain Cleaning">Drain Cleaning &amp; Clog Removal</option>
+                                            <option value="Water Heater">Water Heater Repair &amp; Installation</option>
+                                            <option value="Pipe Repiping">Pipe Repair &amp; Whole-Home Repiping</option>
+                                            <option value="Bathroom Kitchen">Bathroom &amp; Kitchen Fixture Plumbing</option>
+                                            <option value="Leak Detection">Slab Leak &amp; Underground Leak Detection</option>
+                                            <option value="Commercial Plumbing">Commercial Plumbing Solutions</option>
+                                            <option value="Other">Other Service / General Inspection</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!-- Property Type Selection -->
+                                <div class="iq-form-group">
+                                    <label class="iq-label">Property Type</label>
+                                    <div class="iq-property-toggle">
+                                        <div class="iq-toggle-option">
+                                            <input type="radio" id="prop-residential" name="property_type" value="Residential" checked="" />
+                                            <label for="prop-residential" class="iq-toggle-label">
+                                                <img src="./assets/images/home.png" alt="Residential" />
+                                                <span>Residential</span>
+                                            </label>
+                                        </div>
+                                        <div class="iq-toggle-option">
+                                            <input type="radio" id="prop-commercial" name="property_type" value="Commercial" />
+                                            <label for="prop-commercial" class="iq-toggle-label">
+                                                <img src="./assets/images/office-building.avif" alt="Commercial" />
+                                                <span>Commercial</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Contact Info Row 1 -->
+                                <div class="iq-form-row">
+                                    <div class="iq-form-group" style="margin-bottom: 0;">
+                                        <label for="iq-name" class="iq-label">Full Name *</label>
+                                        <div class="iq-input-wrapper">
+                                            <img src="./assets/images/user.avif" alt="" class="iq-field-icon" />
+                                            <input type="text" id="iq-name" name="name" placeholder="John Doe" required="" class="iq-input w-input" />
+                                        </div>
+                                    </div>
+                                    <div class="iq-form-group" style="margin-bottom: 0;">
+                                        <label for="iq-phone" class="iq-label">Phone Number *</label>
+                                        <div class="iq-input-wrapper">
+                                            <img src="./assets/images/telephone.avif" alt="" class="iq-field-icon" />
+                                            <input type="tel" id="iq-phone" name="phone" placeholder="(555) 000-0000" required="" class="iq-input w-input" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Contact Info Row 2 -->
+                                <div class="iq-form-row">
+                                    <div class="iq-form-group" style="margin-bottom: 0;">
+                                        <label for="iq-email" class="iq-label">Email Address *</label>
+                                        <div class="iq-input-wrapper">
+                                            <img src="./assets/images/mail-1.avif" alt="" class="iq-field-icon" />
+                                            <input type="email" id="iq-email" name="email" placeholder="john@example.com" required="" class="iq-input w-input" />
+                                        </div>
+                                    </div>
+                                    <div class="iq-form-group" style="margin-bottom: 0;">
+                                        <label for="iq-urgency" class="iq-label">Urgency / Timeline</label>
+                                        <div class="iq-input-wrapper">
+                                            <img src="./assets/images/hourglass.avif" alt="" class="iq-field-icon" />
+                                            <select id="iq-urgency" name="urgency" class="iq-select w-select">
+                                                <option value="Immediate Emergency">Emergency (ASAP)</option>
+                                                <option value="Same Day">Same Day Service</option>
+                                                <option value="This Week" selected="">Within a Few Days</option>
+                                                <option value="Planning Ahead">Planning Ahead / Estimate Only</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Project Message -->
+                                <div class="iq-form-group">
+                                    <label for="iq-message" class="iq-label">Describe Your Plumbing Need (Optional)</label>
+                                    <textarea id="iq-message" name="message" placeholder="Please provide any details about the issue, location in the home, or special requests..." class="iq-textarea w-input"></textarea>
+                                </div>
+
+                                <!-- Submit Button -->
+                                <button type="submit" class="iq-submit-btn">
+                                    <span>Get My Free Instant Quote</span>
+                                    <img src="./assets/images/send.avif" alt="Submit" />
+                                </button>
+
+                                <div class="iq-privacy-note">
+                                    <img src="./assets/images/padlock.avif" alt="Secure" />
+                                    <span>Your information is 100% confidential &amp; never shared with third parties.</span>
+                                </div>
+                            </form>
+
+                            <!-- Success State -->
+                            <div class="w-form-done" style="display: none;">
+                                <div class="iq-success-box">
+                                    <div class="iq-success-icon">
+                                        <img src="./assets/images/line-rounded-check-circle-white.svg" alt="Success" />
+                                    </div>
+                                    <h4 class="iq-success-title">Quote Request Received!</h4>
+                                    <p class="iq-success-desc">
+                                        Thank you! We have received your request. One of our certified plumbing specialists will review your details and contact you within 15 minutes.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Error State -->
+                            <div class="w-form-fail" style="display: none;">
+                                <div>Oops! Something went wrong while submitting the form. Please give us a call at (555) 234-5678.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- ==============================================
+             Instant Quote Form Section End
+             ============================================== -->
+
         <section class="section-with-padding">
             <div class="container">
                 <div class="_2-column-block">
@@ -1182,9 +1752,8 @@
                         <div role="listitem" class="full-width-center w-dyn-item">
                             <div data-w-id="744400cf-6aff-aa96-fd69-243ae35b750c" class="plumber-card">
                                 <div class="plumber-image-wrapper">
-                                    <div class="plumber-image-border"><img
-                                            src="./assets/images/hero-contractor.png" loading="lazy" alt=""
-                                            class="plumber-image" />
+                                    <div class="plumber-image-border"><img src="./assets/images/hero-contractor.png"
+                                            loading="lazy" alt="" class="plumber-image" />
                                         <div class="plumber-image-hover-color"></div>
                                         <div class="w-layout-grid socials-links-wrapper"><a href="#"
                                                 class="social-links w-inline-block"><img loading="lazy"
