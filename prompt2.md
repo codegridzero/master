@@ -3,9 +3,12 @@ PROMPT 2 — COMPANY DEMO WEBSITE PERSONALIZATION
 
 START FROM HERE.
 
-You are working inside a company folder that was created by the previous lead-research/cold-email automation process.
+You are working inside the company folder inside `coldemail/` that was created by the previous lead-research/cold-email automation process (Prompt 1).
+
+If you are continuing the current lead workflow, operate on the active company folder just created. If multiple company folders exist in `coldemail/` and context is unclear, target the most recently created folder inside `coldemail/` or verify with the user.
 
 Your job now is ONLY to personalize the existing website inside that company folder according to the exact rules below.
+
 
 DO NOT skip any instruction.
 DO NOT change, remove, add, reinterpret, simplify, or replace any requirement.

@@ -522,11 +522,12 @@ The parent/project folder contains:
 
 mastertemplate
 
-and
+and the master Excel file:
 
-leads
+leads.xlsx (located in the root workspace directory)
 
-and/or the master Excel file.
+If `leads.xlsx` does not exist yet, create it with the specified column headers. If it already exists, append the new lead as a new row.
+
 
 When a company qualifies and is added to the Excel sheet:
 
@@ -569,7 +570,7 @@ Always COPY it.
 
 Inside the company folder create:
 
-company details.txt
+companydetails.txt
 
 The file must contain ALL useful research gathered for that company.
 
@@ -718,7 +719,7 @@ Include:
 - website observations
 - anything else relevant
 
-The goal is that another person can read company details.txt and understand the entire company and all research performed without needing to repeat the research.
+The goal is that another person can read companydetails.txt and understand the entire company and all research performed without needing to repeat the research.
 
 ============================================================
 12. SOURCE URLs
@@ -730,7 +731,7 @@ Do not write unsupported claims without a source.
 
 Important source URLs should be included in:
 
-company details.txt
+companydetails.txt
 
 Do not remove useful source links.
 
@@ -782,14 +783,15 @@ Instead report:
 Then show the existing row and any newly discovered information that could be useful for updating the existing record.
 
 ============================================================
-14. ONE MASTER EXCEL FILE ONLY
+14. ONE MASTER EXCEL FILE ONLY (leads.xlsx)
 ============================================================
 
-There must be ONE master lead Excel file.
+There must be ONE master lead Excel file named `leads.xlsx` in the root workspace directory.
 
 Do NOT create a new Excel file for every company.
 
-Every new qualified company must be appended as a new row to the existing master lead sheet.
+If `leads.xlsx` does not exist, create it with the required header columns.
+Every new qualified company must be appended as a new row to this same `leads.xlsx` file.
 
 The process is:
 
@@ -1062,7 +1064,7 @@ Company Folder:
 coldemail/[CompanyNameWithoutSpaces]
 
 Company Details File:
-coldemail/[CompanyNameWithoutSpaces]/company details.txt
+coldemail/[CompanyNameWithoutSpaces]/companydetails.txt
 
 Vercel URL:
 https://master-five-theta.vercel.app/coldemail/[CompanyNameWithoutSpaces]/index.html
@@ -1108,7 +1110,7 @@ Put it into:
 
 linkden
 
-Do not only save these links in company details.txt.
+Do not only save these links in companydetails.txt.
 
 They MUST be included in the Excel row as well.
 
@@ -1136,7 +1138,7 @@ Do not replace Objective A with Objective B.
 
 Do not replace Objective B with Objective A.
 
-Both must be saved in company details.txt.
+Both must be saved in companydetails.txt.
 
 ============================================================
 27. DO NOT LOSE RESEARCH
@@ -1162,7 +1164,7 @@ If you find:
 - public article
 - useful outreach angle
 
-save it in company details.txt.
+save it in companydetails.txt.
 
 Do not perform research and then discard the information.
 
@@ -1214,7 +1216,7 @@ Do not change the company name merely for convenience.
 
 Inside each company folder the research file MUST be:
 
-company details.txt
+companydetails.txt
 
 Do not rename it to:
 
@@ -1225,7 +1227,7 @@ data.txt
 
 Use exactly:
 
-company details.txt
+companydetails.txt
 
 ============================================================
 31. DATE RULE
@@ -1266,10 +1268,10 @@ CHECK:
 [ ] Correct company folder created
 [ ] Company folder name contains no spaces
 [ ] mastertemplate was copied, not modified
-[ ] company details.txt created
+[ ] companydetails.txt created
 [ ] Full research saved
 [ ] Social links included in Excel
-[ ] Social links included in company details.txt
+[ ] Social links included in companydetails.txt
 [ ] Existing Excel rows preserved
 [ ] New lead appended to existing master sheet
 [ ] Correct column order preserved
@@ -1352,7 +1354,7 @@ Rename company folder using company name without spaces.
 STEP 20
 Create:
 
-company details.txt
+companydetails.txt
 
 STEP 21
 Save ALL company + owner + employee + social + source research in that file.
@@ -1421,8 +1423,8 @@ You must then automatically:
 13. Copy the mastertemplate.
 14. Create the coldemail/company folder.
 15. Remove spaces from the company folder name.
-16. Create company details.txt.
-17. Save the complete research inside company details.txt.
+16. Create companydetails.txt.
+17. Save the complete research inside companydetails.txt.
 18. Never lose useful research.
 19. Repeat this exact process every time the user provides another GMB link.
 
