@@ -1,9 +1,10 @@
 """
-Standalone Reusable Hostinger SMTP Email Sender Module.
+Standalone Reusable Hostinger SMTP Email Sender Module with HTML Template Support.
 
-This module provides a clean and reusable interface to send emails
-via Hostinger SMTP using SSL/TLS encryption.
-Credentials can be loaded automatically from a .env file or passed directly.
+This module provides a clean, robust, and reusable interface to send emails
+via Hostinger SMTP using SSL/TLS encryption (port 465 by default).
+Supports plain text, rich responsive HTML templates (MIME multipart),
+and cold pitch email campaigns for RISS.
 """
 
 import os
@@ -13,6 +14,12 @@ from email.message import EmailMessage
 from pathlib import Path
 from typing import Dict, List, Optional, Union
 from dotenv import load_dotenv
+
+# Import email templates
+try:
+    from email_templates import render_cold_pitch_email
+except ImportError:
+    from .email_templates import render_cold_pitch_email
 
 # Automatically load environment variables from .env in the same directory or project root
 _ENV_PATH = Path(__file__).resolve().parent / ".env"
@@ -45,7 +52,9 @@ class SMTPSendingError(SMTPError):
 def send_email(
     to: Union[str, List[str]],
     subject: str,
-    body: str,
+    body: Optional[str] = None,
+    text_body: Optional[str] = None,
+    html_body: Optional[str] = None,
     from_email: Optional[str] = None,
     is_html: bool = False,
     host: Optional[str] = None,
@@ -56,13 +65,16 @@ def send_email(
 ) -> Dict[str, Union[bool, str]]:
     """
     Send an email via Hostinger SMTP (SSL/TLS on port 465 by default).
+    Supports plain text, pure HTML, or multipart MIME (plain text fallback + rich HTML).
 
     Args:
-        to: Recipient email address (single string or list of strings).
+        to: Recipient email address (single string, comma-separated string, or list).
         subject: Subject line of the email.
-        body: Plain text or HTML content of the email.
+        body: Main body content (plain text if is_html=False, or HTML if is_html=True).
+        text_body: Explicit plain text body (for multipart MIME).
+        html_body: Explicit HTML body (for multipart MIME).
         from_email: Sender email address (defaults to configured SMTP_USERNAME).
-        is_html: If True, sends body as HTML content; otherwise plain text.
+        is_html: If True and only 'body' is provided, treats body as HTML.
         host: SMTP host (defaults to SMTP_HOST from .env or smtp.hostinger.com).
         port: SMTP port (defaults to SMTP_PORT from .env or 465).
         username: SMTP username (defaults to SMTP_USERNAME from .env).
@@ -114,17 +126,31 @@ def send_email(
     if not recipient_list:
         raise SMTPConfigError("No valid recipient email address provided.")
 
-    # Build EmailMessage
+    # Determine body contents
+    final_text = text_body
+    final_html = html_body
+
+    if not final_text and not final_html:
+        if is_html:
+            final_html = body or ""
+            final_text = "Please view this message in an HTML-compatible email client."
+        else:
+            final_text = body or ""
+
+    # Build EmailMessage (MIME standard)
     msg = EmailMessage()
     msg["Subject"] = subject or ""
     msg["From"] = sender_addr
     msg["To"] = to_header
 
-    if is_html:
-        msg.set_content(body or "")
-        msg.add_alternative(body or "", subtype="html")
+    if final_text:
+        msg.set_content(final_text)
+        if final_html:
+            msg.add_alternative(final_html, subtype="html")
+    elif final_html:
+        msg.set_content(final_html, subtype="html")
     else:
-        msg.set_content(body or "")
+        msg.set_content("")
 
     # Create SSL Context
     ssl_context = ssl.create_default_context()
@@ -134,7 +160,7 @@ def send_email(
         with smtplib.SMTP_SSL(smtp_host, smtp_port, context=ssl_context, timeout=timeout) as server:
             server.login(smtp_user, smtp_pass)
             server.send_message(msg)
-    except smtplib.SMTPAuthenticationError as auth_err:
+    except smtplib.SMTPAuthenticationError:
         raise SMTPAuthenticationFailedError(
             f"SMTP Authentication failed for user '{smtp_user}'. "
             "Please check your credentials in .env or Hostinger mailbox settings."
@@ -154,5 +180,70 @@ def send_email(
     }
 
 
+def send_cold_pitch_email(
+    to: Union[str, List[str]],
+    recipient_name: str,
+    company_name: str,
+    preview_url: str,
+    subject: Optional[str] = None,
+    sender_name: str = "Abdul Rehman",
+    sender_title: str = "CEO",
+    sender_company: str = "RISS - Remote IT Services & Solutions",
+    sender_phone: str = "+92 347 1663003",
+    sender_email: str = "Abdulrehman226721skp@gmail.com",
+    company_website: str = "https://theriss.net",
+    company_logo_url: str = "https://theriss.net/images/Logo.png",
+    from_email: Optional[str] = None,
+    **smtp_kwargs,
+) -> Dict[str, Union[bool, str]]:
+    """
+    High-level convenience function to render and send a professional cold outreach email.
+
+    Args:
+        to: Prospect email address or list of emails.
+        recipient_name: Prospect receiver's name (e.g. 'John').
+        company_name: Prospect's business name (e.g. 'Mechanical Plumbing Systems, Inc.').
+        preview_url: URL to the website demo preview.
+        subject: Optional custom subject line. Defaults to: 'Quick website preview for {company_name}'.
+        sender_name: Sender's name (default: 'Abdul Rehman').
+        sender_title: Sender's title (default: 'CEO').
+        sender_company: Sender's company name.
+        sender_phone: Sender's WhatsApp / Phone number.
+        sender_email: Sender's contact email.
+        company_website: Company website URL.
+        company_logo_url: Company logo URL.
+        from_email: Optional sender address override.
+        **smtp_kwargs: Optional extra arguments passed to send_email (host, port, username, password, timeout).
+
+    Returns:
+        Dict with keys: 'success' (bool), 'message' (str).
+    """
+    rendered = render_cold_pitch_email(
+        recipient_name=recipient_name,
+        company_name=company_name,
+        preview_url=preview_url,
+        sender_name=sender_name,
+        sender_title=sender_title,
+        sender_company=sender_company,
+        sender_phone=sender_phone,
+        sender_email=sender_email,
+        company_website=company_website,
+        company_logo_url=company_logo_url,
+        custom_subject=subject,
+    )
+
+    return send_email(
+        to=to,
+        subject=rendered["subject"],
+        text_body=rendered["text"],
+        html_body=rendered["html"],
+        from_email=from_email,
+        **smtp_kwargs,
+    )
+
+
 if __name__ == "__main__":
-    print("smtp_sender module loaded. Import this module using: from smtp_sender import send_email")
+    print("smtp_sender module loaded successfully.")
+    print("Available functions:")
+    print("  - send_email(to, subject, body/html_body/text_body, ...)")
+    print("  - send_cold_pitch_email(to, recipient_name, company_name, preview_url, ...)")

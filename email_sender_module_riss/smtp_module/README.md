@@ -1,8 +1,8 @@
-# Standalone Hostinger SMTP Email Module
+# Standalone Hostinger SMTP & Cold Email Module
 
-A production-ready, reusable Python module for sending plain text and HTML emails via **Hostinger SMTP** (SSL/TLS on port 465). 
+A production-ready, reusable Python module for sending plain text and **high-converting, responsive HTML emails** via **Hostinger SMTP** (SSL/TLS on port 465) with built-in branding and cold outreach templates for **RISS (Remote IT Services & Solutions)**.
 
-This module is designed to be **completely standalone**—it has zero coupling to external databases, CRMs, or web apps, allowing you to drop it directly into any Python project.
+This module is designed to be **completely standalone**—drop it directly into any Python scraper, lead-generation workflow, automation pipeline, or CRM.
 
 ---
 
@@ -10,225 +10,139 @@ This module is designed to be **completely standalone**—it has zero coupling t
 
 ```text
 smtp_module/
-├── smtp_sender.py       # Core reusable module containing the send_email() function
-├── .env                 # Environment file holding your SMTP credentials
-├── .gitignore           # Git ignore file protecting .env, caches, and virtual envs
-├── requirements.txt     # Minimal dependencies (python-dotenv)
-├── test_smtp.py         # Standalone interactive test script
-└── README.md            # Complete documentation & integration guide
+├── email_templates.py   # High-converting responsive HTML & text email templates
+├── smtp_sender.py       # Core module with send_email() and send_cold_pitch_email()
+├── preview_template.html# Standalone HTML preview for browser inspection
+├── .env                 # Environment file holding SMTP credentials
+├── .gitignore           # Git ignore file protecting .env, caches, and venv
+├── requirements.txt     # Dependencies (python-dotenv)
+├── test_smtp.py         # Interactive CLI tester with menu options
+└── README.md            # Complete documentation & usage guide
 ```
 
 ---
 
-## ⚙️ Where Values Are Stored & How to Change Them
+## 🌟 Key Features
 
-All configuration values can be customized either globally via the [`.env`](file:///home/veyren/Desktop/email_sender_module_riss/smtp_module/.env) file or dynamically per function call in Python.
+1. **Brand-Aligned Cold Pitch Template**:
+   - Official RISS Logo (`https://theriss.net/images/Logo.png`)
+   - Clean dark-navy brand banner and modern card styling
+   - Personalized prospect name & company name
+   - High-contrast Call-To-Action (CTA) button leading directly to the live website preview
+   - 4 visual feature highlight cards (Conversion UI, Mobile sticky bar & WhatsApp chat, frictionless quote form, engaging UX)
+   - Low-friction reassurance statement
+   - Executive CEO signature card (Abdul Rehman, WhatsApp 1-click link, email, website)
+   - Professional CAN-SPAM compliant opt-out footer
+2. **Multipart MIME Deliverability**:
+   - Automatically sends both HTML and plain-text fallback so spam filters remain happy and every email client renders perfectly.
+3. **Cross-Client Compatibility**:
+   - Handcrafted responsive layout tested for Gmail, Apple Mail, Outlook, Yahoo, and Mobile browsers.
 
-### 1. Configuration in `.env`
-Open [`.env`](file:///home/veyren/Desktop/email_sender_module_riss/smtp_module/.env) to edit global default settings:
+---
 
-| Variable in `.env` | Current / Default Value | Purpose / How to Change |
-| :--- | :--- | :--- |
-| `SMTP_HOST` | `smtp.hostinger.com` | The SMTP server address. Change if using another mail provider. |
-| `SMTP_PORT` | `465` | SSL/TLS port (typically `465`). |
-| `SMTP_USERNAME` | `info@theriss.net` | The mailbox username / email address used for authentication. |
-| `SMTP_PASSWORD` | *(Your mailbox password)* | The password for your Hostinger email account. |
+## ⚙️ Configuration & Credentials
 
+Credentials can be loaded automatically from [`.env`](file:///home/veyren/Desktop/main/email_sender_module_riss/smtp_module/.env) or passed directly via function arguments.
+
+### `.env` File Example:
 ```ini
-# Example .env format
 SMTP_HOST=smtp.hostinger.com
 SMTP_PORT=465
 SMTP_USERNAME=info@theriss.net
 SMTP_PASSWORD=your_mailbox_password
 ```
 
-### 2. Parameters in `send_email()`
-You can also override any configuration directly inside your Python code when calling `send_email()`:
-
-```python
-send_email(
-    to="recipient@example.com",     # (Required) Single email or list of emails
-    subject="Email Subject",        # (Required) Subject line
-    body="Message body text",       # (Required) Plain text or HTML body
-    from_email="info@theriss.net",  # (Optional) Defaults to SMTP_USERNAME
-    is_html=False,                  # (Optional) Set to True for rich HTML emails
-    host=None,                      # (Optional) Override SMTP host
-    port=None,                      # (Optional) Override SMTP port
-    username=None,                  # (Optional) Override SMTP username
-    password=None,                  # (Optional) Override SMTP password
-    timeout=30                      # (Optional) Connection timeout in seconds
-)
-```
-
 ---
 
-## 🚀 How to Implement in Any Python Project
+## 🚀 Quick Usage Examples
 
-### Approach A: Copy into your new project
-1. Copy [`smtp_sender.py`](file:///home/veyren/Desktop/email_sender_module_riss/smtp_module/smtp_sender.py) and [`.env`](file:///home/veyren/Desktop/email_sender_module_riss/smtp_module/.env) into your new project directory.
-2. Install dependencies in your project environment:
-   ```bash
-   pip install python-dotenv
-   ```
-3. Import and call the function in your code:
-   ```python
-   from smtp_sender import send_email
+### 1. Send Cold Pitch Email (Recommended)
 
-   send_email(
-       to="user@example.com",
-       subject="Hello from my new project",
-       body="This email was sent using the reusable SMTP module."
-   )
-   ```
-
----
-
-### Approach B: Import without copying files (Python Path)
-If you want to keep `smtp_module` in its own folder and call it from another directory on your PC:
+To send a cold pitch email where only client details and demo preview link change:
 
 ```python
-import sys
-# Add path to the smtp_module folder
-sys.path.append("/home/veyren/Desktop/email_sender_module_riss/smtp_module")
+from smtp_sender import send_cold_pitch_email
 
-from smtp_sender import send_email
-
-send_email(
+result = send_cold_pitch_email(
     to="client@example.com",
-    subject="Automated Notification",
-    body="System notification details here..."
-)
-```
-
----
-
-### Approach C: Pass credentials in code (No `.env` file needed)
-If your target project manages credentials differently (e.g. from a database or cloud vault):
-
-```python
-from smtp_sender import send_email
-
-send_email(
-    to="client@example.com",
-    subject="Direct Credentials Test",
-    body="Sending email without using .env",
-    username="info@theriss.net",
-    password="your_password_here"
-)
-```
-
----
-
-## 💻 Code Examples
-
-### 1. Basic Text Email
-```python
-from smtp_sender import send_email
-
-result = send_email(
-    to="recipient@example.com",
-    subject="Quick Update",
-    body="Hello,\n\nHere is the update you requested."
+    recipient_name="John",
+    company_name="Mechanical Plumbing Systems, Inc.",
+    preview_url="https://masterplumber.vercel.app/Mechanical%20Plumbing%20Systems/"
 )
 
 print(result["message"])
 ```
 
-### 2. Sending to Multiple Recipients
+### 2. Customizing Sender Information or Subject
+
 ```python
-from smtp_sender import send_email
+from smtp_sender import send_cold_pitch_email
 
-recipients = ["john@example.com", "sarah@example.com", "team@example.com"]
-
-send_email(
-    to=recipients,
-    subject="Team Announcement",
-    body="Hi Team,\n\nPlease see the weekly update attached."
+send_cold_pitch_email(
+    to="prospect@example.com",
+    recipient_name="Sarah",
+    company_name="Apex Electric Solutions",
+    preview_url="https://masterplumber.vercel.app/Apex%20Electric/",
+    subject="New website design concept for Apex Electric Solutions",
+    sender_name="Abdul Rehman",
+    sender_title="CEO",
+    sender_phone="+92 347 1663003",
+    sender_email="Abdulrehman226721skp@gmail.com",
+    company_website="https://theriss.net"
 )
 ```
 
-### 3. Sending an HTML Email
+### 3. Rendering HTML & Plain Text Without Sending Immediately
+
+If you want to preview or store the generated HTML/Text:
+
+```python
+from email_templates import render_cold_pitch_email
+
+rendered = render_cold_pitch_email(
+    recipient_name="David",
+    company_name="Skyline Roofing LLC",
+    preview_url="https://masterplumber.vercel.app/Skyline%20Roofing/"
+)
+
+print("Subject:", rendered["subject"])
+print("Plain Text Body:\n", rendered["text"])
+# Save or inspect HTML
+with open("skyline_pitch.html", "w", encoding="utf-8") as f:
+    f.write(rendered["html"])
+```
+
+### 4. Basic General Purpose Email
+
 ```python
 from smtp_sender import send_email
 
-html_template = """
-<!DOCTYPE html>
-<html>
-<head>
-  <style>
-    body { font-family: Arial, sans-serif; }
-    .card { padding: 20px; background-color: #f4f6f8; border-radius: 8px; }
-    .btn { background-color: #007bff; color: white; padding: 10px 20px; text-decoration: none; border-radius: 4px; }
-  </style>
-</head>
-<body>
-  <div class="card">
-    <h2>Welcome to Our Service!</h2>
-    <p>Thank you for choosing us. Click below to verify your account:</p>
-    <a class="btn" href="https://example.com/verify">Verify Account</a>
-  </div>
-</body>
-</html>
-"""
-
 send_email(
-    to="client@example.com",
-    subject="Welcome to Our Service!",
-    body=html_template,
-    is_html=True
+    to="user@example.com",
+    subject="Standard Notification",
+    body="Hello, this is a plain text notification."
 )
-```
-
-### 4. Production Error Handling Pattern
-```python
-from smtp_sender import (
-    send_email,
-    SMTPConfigError,
-    SMTPAuthenticationFailedError,
-    SMTPSendingError,
-)
-
-try:
-    send_email(
-        to="user@example.com",
-        subject="Monthly Invoice",
-        body="Please find your invoice details."
-    )
-    print("Email sent successfully!")
-except SMTPConfigError as e:
-    # Triggered if password or recipient is missing
-    print(f"[Configuration Error] {e}")
-except SMTPAuthenticationFailedError as e:
-    # Triggered if username/password is rejected by Hostinger
-    print(f"[Auth Error] {e}")
-except SMTPSendingError as e:
-    # Triggered if network/server connection fails
-    print(f"[Delivery Error] {e}")
 ```
 
 ---
 
-## 🧪 Testing the Module
+## 🧪 Testing
 
-To run an interactive test at any time:
+Run the interactive test script:
 
-1. Navigate to the module directory:
-   ```bash
-   cd /home/veyren/Desktop/email_sender_module_riss/smtp_module
-   ```
-2. Activate the virtual environment:
-   ```bash
-   source .venv/bin/activate
-   ```
-3. Run the test script:
-   ```bash
-   python3 test_smtp.py
-   ```
+```bash
+cd /home/veyren/Desktop/main/email_sender_module_riss/smtp_module
+source .venv/bin/activate
+python3 test_smtp.py
+```
+
+The interactive menu provides 3 options:
+1. **Send Professional Cold Pitch Email** (Prompts for recipient, company name, demo link).
+2. **Send Simple Plain-Text Test Email**.
+3. **Export/Update Local HTML Preview** (`preview_template.html`).
 
 ---
 
-## 🔒 Security Best Practices
+## 🌐 Visual Preview
 
-1. **Keep `.env` Protected**: The `.gitignore` file prevents `.env` from ever being pushed to public or private Git repositories.
-2. **Never Hardcode Secrets**: Keep mailbox passwords exclusively in `.env` or inject them via environment variables in production.
-3. **Encrypted in Transit**: Communication is enforced via SSL/TLS on port 465, ensuring full encryption between your application and Hostinger's mail servers.
+You can open [`preview_template.html`](file:///home/veyren/Desktop/main/email_sender_module_riss/smtp_module/preview_template.html) in Google Chrome, Firefox, or any browser to see the exact email design.
