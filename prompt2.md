@@ -564,13 +564,13 @@ Never reuse an image already used elsewhere on the page.
 
 Personalize EVERY text element in the pricing section.
 
-Do not leave generic placeholder text.
+Do not leave generic placeholder text. Also text in pricing secyion will be change to real text of the company all text within the 3 cards of pricing should be the text of the 3 services of the company which the company wants to show in pricing section.
 
 Use real company information and real pricing information whenever publicly available.
 
 If the company's current website publicly lists actual pricing/packages, research it and use those real values.
 
-If actual company pricing is not publicly available, DO NOT invent prices and present them as real company pricing.
+If actual company pricing is not publicly available, DO NOT invent prices and present them as real company pricing. but if you didnt find text to put in any card, then make something up based on the services of the company. but this is for text only not for pricing 
 
 In that situation, personalize the section using accurate service/package descriptions and clearly appropriate quote-based language without fabricating pricing facts.
 
@@ -828,7 +828,7 @@ Before declaring the task complete, verify all of the following:
 14. Stats use real/defensible company information.
 15. Services section uses actual company services.
 16. Project section is personalized without falsely claiming unsupported projects.
-17. Pricing section uses real pricing where publicly available and does not fabricate prices.
+17. Pricing section uses real pricing where publicly available and does not fabricate prices. Also text in pricing secyion will be change to real text of the company all text within the 3 cards of pricing should be the text of the 3 services of the company which the company wants to show in pricing section.
 18. FAQ section is personalized using accurate company information.
 19. Footer contains real company information.
 20. All generated content is in English.
