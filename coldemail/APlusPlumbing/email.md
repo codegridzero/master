@@ -78,22 +78,6 @@ RISS Remote IT Services and Solution
 ## Social 1
 
 Platform:
-Facebook
-
-Profile:
-A+ Plumbing
-
-Link:
-https://www.facebook.com/people/A-Plumbing/100063901768407/
-
-Message:
-
-Hi Gary, I came across A+ Plumbing and put together a quick website preview for your business: https://master-five-theta.vercel.app/coldemail/APlusPlumbing/index.html. I focused it on stronger calls to action, mobile contact options, and making it easier for local homeowners to request 24/7 plumbing or water heater service. No obligation at all — I just wanted to share it with you and get your thoughts!
-
-
-## Social 2
-
-Platform:
 Instagram
 
 Profile:
@@ -107,7 +91,7 @@ Message:
 Hi Gary, I created a quick conversion-focused website preview for A+ Plumbing: https://master-five-theta.vercel.app/coldemail/APlusPlumbing/index.html. It highlights your 4.9-star reputation across Covington & Greater Cincinnati and makes mobile service booking seamless. No obligation — check it out whenever you get a chance!
 
 
-## Social 3
+## Social 2
 
 Platform:
 LinkedIn
@@ -116,7 +100,7 @@ Profile:
 Kadin Sarieh
 
 Link:
-https://www.linkedin.com/in/kadin-sarieh
+https://www.linkedin.com/in/kadin-sarieh-979146237/
 
 Message:
 
